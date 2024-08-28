@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="D:/SCSJSON/jarfile/newjars/jackson-annotations-2.15.2.jar"/>
 	<classpathentry kind="lib" path="D:/SCSJSON/jarfile/newjars/jackson-core-2.15.2.jar"/>
 	<classpathentry kind="lib" path="D:/SCSJSON/jarfile/newjars/jackson-databind-2.15.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Shardul Garade/Downloads/mysql-connector-java-5.1.15.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
