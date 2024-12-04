@@ -27,7 +27,7 @@ public class CallableInterfaceDemo {
 		int salary=sc.nextInt();
 		
 		//call emppro3(9,'John',29,'m',1900,'wfh','JO1234');
-		String query="{call emppro3(?,?,?,?,?,?,?,   ?)}"; //8 para
+		String query="{call emppro4(?,?,?,?,?,?,?,?)}"; //8 para
 		CallableStatement cs=con.prepareCall(query);
 		cs.setInt(1,eno);
 		cs.setString(2, ename);
@@ -54,3 +54,15 @@ public class CallableInterfaceDemo {
 	}
 
 }
+
+
+/*
+DELIMITER &&  
+CREATE PROCEDURE emppro4(in peno int(5),in pename varchar(20),in page int(3),in pgender varchar(10), in psalary int(5), in pworkmode varchar(10),in ppassport varchar(10), out excelr varchar(10))
+	BEGIN 
+	insert into jdbcemployee(eno,ename,age,gender,salary,workmode,passport)
+                          values(peno,pename,page,pgender,psalary,pworkmode,ppassport);
+        set excelr='inserted';
+END &&  
+DELIMITER ;
+*/

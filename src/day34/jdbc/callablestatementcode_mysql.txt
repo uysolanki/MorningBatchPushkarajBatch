@@ -1,0 +1,78 @@
+dbname : mb2db
+
+DELIMITER &&  
+CREATE PROCEDURE emppro1(in peno int(5),in pename varchar(20),in page int(3),in pcity varchar(20),in pgender varchar(10), in psalary int(5), in pworkmode varchar(10),in ppassport varchar(10))
+	BEGIN 
+	insert into jdbcemployee(eno,ename,age,city,gender,salary,workmode,passport)
+                          values(peno,pename,page,pcity,pgender,psalary,pworkmode,ppassport);
+END &&  
+DELIMITER ;  
+---
+
+CREATE TABLE student (
+rno int(5),
+sname varchar(20),
+per int(5),
+division varchar(20),
+PRIMARY KEY (rno));
+
+
+DELIMITER &&  
+	CREATE PROCEDURE studpro1(in prno int(5),in psname varchar(20),in psper int(20),in pdiv varchar(20), out enumtech varchar(20))
+	BEGIN 
+	insert into student values(prno,psname,psper,pdiv);
+  set enumtech='true';
+	END &&  
+	DELIMITER ;
+	
+	
+---
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class CallableDemoMySql {
+public static void main(String[] args) {
+	try
+	{
+		String query;
+		String dbname="jdbc:mysql://localhost:3306/gldbnew";
+		String username="root";
+		String password="";
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection con=DriverManager.getConnection(dbname,username,password);
+		
+	
+	int a=18;
+	String b ="virat";
+	int c=87;
+	String d="A";
+	
+	query="{call studpro(?,?,?,?,?)}";
+	
+	CallableStatement cs=con.prepareCall(query);
+	
+	cs.setInt(1,a);
+	cs.setString(2,b);
+	cs.setInt(3,c);
+	cs.setString(4,d);
+	cs.registerOutParameter(5,java.sql.Types.VARCHAR);
+	cs.executeUpdate();
+	
+	String result=cs.getString(5);
+	
+	if (result.equals("true")){
+		System.out.println("Record Inserted");
+		}
+	else
+	{
+		System.out.println("Record Not Inserted");
+		
+	}
+	}
+	catch(Exception e){
+		e.printStackTrace();
+	}
+
+}
+}
